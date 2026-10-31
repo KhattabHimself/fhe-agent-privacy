@@ -226,7 +226,7 @@ This is a research prototype, written to measure feasibility. It is not producti
 @misc{fhe-agent-privacy-2026,
   title  = {Can {FHE} Protect {AI} Agents? A Threat Model and Feasibility
             Study of Encrypted Tool-Calling},
-  author = {Mohamed},
+  author = {Mohamed Khattab},
   year   = {2026},
   note   = {Course project, Security, Spring 2026},
   howpublished = {\url{https://github.com/KhattabHimself/fhe-agent-privacy}}

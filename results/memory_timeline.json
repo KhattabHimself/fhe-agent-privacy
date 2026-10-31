@@ -1,0 +1,184 @@
+{
+  "runs": [
+    {
+      "baseline_rss_mb": 582.5,
+      "peak_rss_mb": 756.8,
+      "peak_time_ms": 1748.3,
+      "peak_phase": "serialization",
+      "spike_factor": 1.3,
+      "phase_peaks": [
+        {
+          "phase": "context_creation",
+          "peak_rss_mb": 583.3,
+          "delta_from_baseline_mb": 0.8
+        },
+        {
+          "phase": "galois_key_generation",
+          "peak_rss_mb": 583.8,
+          "delta_from_baseline_mb": 1.3
+        },
+        {
+          "phase": "serialization",
+          "peak_rss_mb": 756.8,
+          "delta_from_baseline_mb": 174.3
+        },
+        {
+          "phase": "done",
+          "peak_rss_mb": 585.3,
+          "delta_from_baseline_mb": 2.8
+        }
+      ],
+      "timeline": [
+        {
+          "timestamp_ms": 0.0,
+          "rss_mb": 582.5
+        },
+        {
+          "timestamp_ms": 0.5,
+          "rss_mb": 582.6
+        },
+        {
+          "timestamp_ms": 391.0,
+          "rss_mb": 583.3
+        },
+        {
+          "timestamp_ms": 821.1,
+          "rss_mb": 583.8
+        },
+        {
+          "timestamp_ms": 1748.3,
+          "rss_mb": 756.8
+        },
+        {
+          "timestamp_ms": 1798.7,
+          "rss_mb": 585.3
+        }
+      ],
+      "phases": [
+        {
+          "timestamp_ms": 0.5,
+          "phase": "context_creation"
+        },
+        {
+          "timestamp_ms": 391.2,
+          "phase": "galois_key_generation"
+        },
+        {
+          "timestamp_ms": 821.2,
+          "phase": "encryption"
+        },
+        {
+          "timestamp_ms": 828.6,
+          "phase": "dot_product"
+        },
+        {
+          "timestamp_ms": 844.4,
+          "phase": "polynomial_activation"
+        },
+        {
+          "timestamp_ms": 863.6,
+          "phase": "serialization"
+        },
+        {
+          "timestamp_ms": 1748.4,
+          "phase": "decryption"
+        },
+        {
+          "timestamp_ms": 1754.9,
+          "phase": "done"
+        }
+      ],
+      "preset": "deep",
+      "poly_modulus_degree": 16384,
+      "multiplicative_depth": 4
+    },
+    {
+      "baseline_rss_mb": 585.3,
+      "peak_rss_mb": 621.8,
+      "peak_time_ms": 337.3,
+      "peak_phase": "serialization",
+      "spike_factor": 1.06,
+      "phase_peaks": [
+        {
+          "phase": "context_creation",
+          "peak_rss_mb": 586.5,
+          "delta_from_baseline_mb": 1.2
+        },
+        {
+          "phase": "galois_key_generation",
+          "peak_rss_mb": 589.9,
+          "delta_from_baseline_mb": 4.6
+        },
+        {
+          "phase": "serialization",
+          "peak_rss_mb": 621.8,
+          "delta_from_baseline_mb": 36.5
+        },
+        {
+          "phase": "done",
+          "peak_rss_mb": 587.9,
+          "delta_from_baseline_mb": 2.6
+        }
+      ],
+      "timeline": [
+        {
+          "timestamp_ms": 0.0,
+          "rss_mb": 585.3
+        },
+        {
+          "timestamp_ms": 0.4,
+          "rss_mb": 585.3
+        },
+        {
+          "timestamp_ms": 98.3,
+          "rss_mb": 586.5
+        },
+        {
+          "timestamp_ms": 183.9,
+          "rss_mb": 589.9
+        },
+        {
+          "timestamp_ms": 337.3,
+          "rss_mb": 621.8
+        },
+        {
+          "timestamp_ms": 388.0,
+          "rss_mb": 587.9
+        }
+      ],
+      "phases": [
+        {
+          "timestamp_ms": 0.4,
+          "phase": "context_creation"
+        },
+        {
+          "timestamp_ms": 98.4,
+          "phase": "galois_key_generation"
+        },
+        {
+          "timestamp_ms": 184.0,
+          "phase": "encryption"
+        },
+        {
+          "timestamp_ms": 186.6,
+          "phase": "dot_product"
+        },
+        {
+          "timestamp_ms": 191.5,
+          "phase": "serialization"
+        },
+        {
+          "timestamp_ms": 337.5,
+          "phase": "decryption"
+        },
+        {
+          "timestamp_ms": 338.9,
+          "phase": "done"
+        }
+      ],
+      "preset": "light",
+      "poly_modulus_degree": 8192,
+      "multiplicative_depth": 2
+    }
+  ]
+}

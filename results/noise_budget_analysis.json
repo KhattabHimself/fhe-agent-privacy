@@ -1,0 +1,159 @@
+{
+  "presets": [
+    {
+      "preset": "light",
+      "poly_modulus_degree": 8192,
+      "multiplicative_depth": 2,
+      "squaring_test": [
+        {
+          "depth": 0,
+          "operation": "encrypt",
+          "expected": 0.6,
+          "decrypted": 0.6000000007057614,
+          "abs_error": 7.057614492822495e-10,
+          "bits_of_precision": 30.40010032075127,
+          "status": "ok"
+        },
+        {
+          "depth": 1,
+          "operation": "square (x^2)",
+          "expected": 0.36,
+          "decrypted": 0.3600000497729406,
+          "abs_error": 4.977294060237725e-08,
+          "bits_of_precision": 24.260063134648895,
+          "status": "within_tolerance"
+        },
+        {
+          "depth": 2,
+          "operation": "square (x^4)",
+          "expected": 0.1296,
+          "decrypted": 0.12960012223801487,
+          "abs_error": 1.2223801487687425e-07,
+          "bits_of_precision": 22.963803644640027,
+          "status": "within_tolerance"
+        },
+        {
+          "depth": 3,
+          "operation": "square (x^8)",
+          "status": "FAILED",
+          "error_type": "ValueError",
+          "message": "scale out of bounds",
+          "note": "exceeded available multiplicative depth (2)"
+        }
+      ],
+      "pipeline_error_tracking": [
+        {
+          "step": "encrypt",
+          "depth": 0,
+          "max_abs_error": 2.7591745555000102e-09,
+          "bits_of_precision": 28.4331161242294
+        },
+        {
+          "step": "dot_product_plus_bias",
+          "depth": 1,
+          "expected": 0.15102147950208422,
+          "decrypted": 0.15102275186083677,
+          "max_abs_error": 1.2723587525520497e-06,
+          "bits_of_precision": 19.584063061002105
+        },
+        {
+          "step": "cubic_activation",
+          "depth": 4,
+          "error": "scale out of bounds",
+          "note": "requires depth 4 but preset has depth 2"
+        }
+      ],
+      "max_depth_before_failure": 2,
+      "noise_cliff_at_depth": 3
+    },
+    {
+      "preset": "deep",
+      "poly_modulus_degree": 16384,
+      "multiplicative_depth": 4,
+      "squaring_test": [
+        {
+          "depth": 0,
+          "operation": "encrypt",
+          "expected": 0.6,
+          "decrypted": 0.600000000110297,
+          "abs_error": 1.1029699376052804e-10,
+          "bits_of_precision": 33.07788747930319,
+          "status": "ok"
+        },
+        {
+          "depth": 1,
+          "operation": "square (x^2)",
+          "expected": 0.36,
+          "decrypted": 0.3600005169799726,
+          "abs_error": 5.169799726090218e-07,
+          "bits_of_precision": 20.883388271441717,
+          "status": "within_tolerance"
+        },
+        {
+          "depth": 2,
+          "operation": "square (x^4)",
+          "expected": 0.1296,
+          "decrypted": 0.12960078603259087,
+          "abs_error": 7.860325908770616e-07,
+          "bits_of_precision": 20.27890753274299,
+          "status": "within_tolerance"
+        },
+        {
+          "depth": 3,
+          "operation": "square (x^8)",
+          "expected": 0.016796159999999997,
+          "decrypted": 0.016796423503947347,
+          "abs_error": 2.635039473494749e-07,
+          "bits_of_precision": 21.855672090285072,
+          "status": "within_tolerance"
+        },
+        {
+          "depth": 4,
+          "operation": "square (x^16)",
+          "expected": 0.0002821109907455999,
+          "decrypted": 0.00028212176631157814,
+          "abs_error": 1.0775565978241898e-08,
+          "bits_of_precision": 26.46766111135682,
+          "status": "within_tolerance"
+        },
+        {
+          "depth": 5,
+          "operation": "square (x^32)",
+          "status": "FAILED",
+          "error_type": "ValueError",
+          "message": "scale out of bounds",
+          "note": "exceeded available multiplicative depth (4)"
+        }
+      ],
+      "pipeline_error_tracking": [
+        {
+          "step": "encrypt",
+          "depth": 0,
+          "max_abs_error": 5.747959663793267e-09,
+          "bits_of_precision": 27.374302916242787
+        },
+        {
+          "step": "dot_product_plus_bias",
+          "depth": 1,
+          "expected": -0.036874467675703904,
+          "decrypted": -0.036874779233852295,
+          "max_abs_error": 3.1155814839145535e-07,
+          "bits_of_precision": 21.613995215033015
+        },
+        {
+          "step": "cubic_activation",
+          "depth": 4,
+          "expected": 0.4927359304246301,
+          "decrypted": 0.49273584777052953,
+          "max_abs_error": 8.265410056385036e-08,
+          "bits_of_precision": 23.528338364065483,
+          "levels_remaining": 0
+        }
+      ],
+      "max_depth_before_failure": 4,
+      "noise_cliff_at_depth": 5
+    }
+  ],
+  "clinical_tolerance": 0.01,
+  "methodology": "TenSEAL does not expose SEAL's invariant_noise_budget(). We estimate the effective budget by performing repeated ciphertext-ciphertext squaring and measuring when decryption returns errors exceeding the clinical tolerance (0.01) or when the operation throws an exception due to exhausted modulus chain."
+}

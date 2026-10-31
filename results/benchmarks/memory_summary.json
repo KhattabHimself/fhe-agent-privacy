@@ -1,0 +1,25 @@
+{
+  "pir": [
+    {
+      "operation": "PIR (100 records)",
+      "peak_rss_mb": 123.23828125,
+      "key_size_mb": 0.7751913070678711,
+      "ciphertext_kb": 422.35546875
+    },
+    {
+      "operation": "PIR (500 records)",
+      "peak_rss_mb": 125.265625,
+      "key_size_mb": 0.775177001953125,
+      "ciphertext_kb": 422.3720703125
+    }
+  ],
+  "fhe": [
+    {
+      "operation": "FHE linear (n=8192)",
+      "peak_rss_mb": 241.9375,
+      "key_size_mb": 0.6721658706665039,
+      "galois_key_mb": 32.041476249694824,
+      "ciphertext_kb": 326.455078125
+    }
+  ]
+}

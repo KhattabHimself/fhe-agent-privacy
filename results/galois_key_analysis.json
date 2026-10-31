@@ -1,0 +1,36 @@
+{
+  "configurations": [
+    {
+      "preset": "light",
+      "poly_modulus_degree": 8192,
+      "n_slots": 4096,
+      "multiplicative_depth": 2,
+      "context_without_galois_mb": 1.79,
+      "context_with_galois_mb": 33.83,
+      "galois_keys_only_mb": 32.04,
+      "galois_pct_of_context": 94.7,
+      "full_context_with_sk_mb": 0.67,
+      "n_power_of_2_rotation_keys": 12,
+      "estimated_per_key_mb": 2.67,
+      "ciphertext_bytes": 334432,
+      "ciphertext_kb": 326.6
+    },
+    {
+      "preset": "deep",
+      "poly_modulus_degree": 16384,
+      "n_slots": 8192,
+      "multiplicative_depth": 4,
+      "context_without_galois_mb": 7.54,
+      "context_with_galois_mb": 171.41,
+      "galois_keys_only_mb": 163.88,
+      "galois_pct_of_context": 95.6,
+      "full_context_with_sk_mb": 1.88,
+      "n_power_of_2_rotation_keys": 13,
+      "estimated_per_key_mb": 12.61,
+      "ciphertext_bytes": 1053243,
+      "ciphertext_kb": 1028.6
+    }
+  ],
+  "scaling_factor": 5.1,
+  "insight": "Doubling poly_modulus_degree from 8192 to 16384 increases Galois key size by 5.1x (32.0 MB -> 163.9 MB). TenSEAL always generates all power-of-2 rotation keys; SEAL's C++ API allows selective generation but TenSEAL Python does not expose this. You always pay the full cost."
+}

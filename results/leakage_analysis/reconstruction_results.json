@@ -1,0 +1,42 @@
+{
+  "plaintext": {
+    "FrequencyAttack": {
+      "accuracy": 1.0,
+      "top_3_accuracy": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0
+    },
+    "SequenceAttack": {
+      "accuracy": 1.0,
+      "top_3_accuracy": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0
+    },
+    "MLClassifierAttack": {
+      "accuracy": 1.0,
+      "top_3_accuracy": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0
+    }
+  },
+  "encrypted": {
+    "FrequencyAttack": {
+      "accuracy": 0.23333333333333334,
+      "top_3_accuracy": 0.6333333333333333,
+      "precision_macro": 0.35788690476190477,
+      "recall_macro": 0.2451388888888889
+    },
+    "SequenceAttack": {
+      "accuracy": 0.26666666666666666,
+      "top_3_accuracy": 0.6666666666666666,
+      "precision_macro": 0.4,
+      "recall_macro": 0.27013888888888893
+    },
+    "MLClassifierAttack": {
+      "accuracy": 0.3333333333333333,
+      "top_3_accuracy": 0.8666666666666667,
+      "precision_macro": 0.34523809523809523,
+      "recall_macro": 0.2673611111111111
+    }
+  }
+}

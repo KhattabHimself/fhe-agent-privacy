@@ -1,0 +1,29 @@
+{
+  "summary": {
+    "total_sessions": 100,
+    "total_calls": 391,
+    "leakage_bits": 0.0,
+    "mutual_information": 0.0,
+    "reidentification_probability": 0.0,
+    "total_leakage_score": 0.4069892583947758
+  },
+  "direct": {
+    "content_entropy_bits": 6.3971267208583455,
+    "avg_input_size_bytes": 30.95140664961637,
+    "timing_entropy_bits": 2.72339976829461,
+    "unique_parameters": 10,
+    "calls_analyzed": 391
+  },
+  "correlation": {
+    "cooccurrence_entropy_bits": 3.2593983817668652,
+    "parameter_overlap_rate": 0.35738831615120276,
+    "sequence_predictability": 0.281786941580756,
+    "unique_bigrams": 12
+  },
+  "frequency": {
+    "query_distribution_entropy_bits": 6.5578578423802165,
+    "repeat_query_rate": 0.6138107416879796,
+    "top_query_concentration": 0.0639386189258312,
+    "unique_query_types": 182
+  }
+}

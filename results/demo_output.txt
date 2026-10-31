@@ -1,0 +1,203 @@
+
+====================  ENCRYPTED TOOL-CALLING DEMO  =====================
+
+  Scenario: A medical AI agent assists with treatment decisions.
+  The agent uses two privacy-preserving tool calls:
+    1. PIR -- look up drug interactions (server can't see which drug)
+    2. FHE -- compute patient risk score (server can't see features)
+  All decisions are made locally by the agent.
+
+========================================================================
+
+=======================  PHASE 1: SYSTEM SETUP  ========================
+
+  Loading drug interaction database...
+    Loaded 1000 drug interaction records
+    Using 200 records for demo (faster setup)
+
+  Initializing PIR scheme (BFV encryption)...
+    PIR ready (666 ms)
+    Database: 200 records, server CANNOT see query targets
+
+  Initializing FHE risk scoring (CKKS encryption)...
+    FHE ready (850 ms)
+    Model: cardiovascular risk (8 features, cubic sigmoid)
+    CKKS params: poly_mod=16384, depth=4, 128-bit security
+
+  Generating 10 patient cases...
+    Ready: 10 patients with drug interaction queries
+
+  Setup complete. Total: 1516 ms
+========================================================================
+
+===================  PHASE 2: DETAILED WALKTHROUGH  ====================
+
+  Patient: Margaret T., age 72
+  Currently taking: warfarin
+  Doctor wants to prescribe: albuterol (new inhaler for COPD)
+  Question: Is it safe? What is the patient's cardiac risk?
+
+  Step 1: Drug Interaction Lookup (PIR)
+  ........................................................................
+            AGENT VIEW             |            SERVER VIEW            
+-----------------------------------+-----------------------------------
+Query: warfarin + albuterol        | Received: encrypted BFV ciphertext
+Encrypted query: 422.3 KB          | Size: 422.3 KB                    
+Time: 3.8 ms                       | Drug pair: <UNKNOWN>              
+            AGENT VIEW             |            SERVER VIEW            
+-----------------------------------+-----------------------------------
+Waiting for server response...     | Processed 200 records             
+Received: 96 encrypted parts       | Time: 203.5 ms                    
+                                   | Response: 39.6 MB                 
+                                   | Which record? <CANNOT DETERMINE>  
+            AGENT VIEW             |            SERVER VIEW            
+-----------------------------------+-----------------------------------
+Decrypted result:                  | Result: <ENCRYPTED>               
+  warfarin + albuterol             | Severity: <UNKNOWN>               
+  Severity: MODERATE               | Description: <UNKNOWN>            
+  Concurrent use of Warfarin and A |                                   
+Decrypt time: 129.6 ms             | Server learned: NOTHING           
+Correct: YES                       | (0 bits of information)           
+
+  Step 2: Patient Risk Scoring (FHE)
+  ........................................................................
+            AGENT VIEW             |            SERVER VIEW            
+-----------------------------------+-----------------------------------
+Patient: age=72, BMI=31.2          | Received: CKKS ciphertext         
+  BP=158/95                        | Size: 1.0 MB                      
+  chol=265, gluc=110               | Patient age: <ENCRYPTED>          
+  meds=6, conditions=3             | Patient BMI: <ENCRYPTED>          
+Encrypted: 1.0 MB                  | Blood pressure: <ENCRYPTED>       
+Time: 7.1 ms                       | All features: <UNKNOWN>           
+            AGENT VIEW             |            SERVER VIEW            
+-----------------------------------+-----------------------------------
+Waiting for server computation...  | Computing: w . enc(x) + b         
+Received encrypted score           | Then: sigmoid approximation       
+                                   | Time: 42.0 ms                     
+                                   | Score value: <ENCRYPTED>          
+            AGENT VIEW             |            SERVER VIEW            
+-----------------------------------+-----------------------------------
+Decrypted risk score: 0.4952       | Score: <ENCRYPTED>                
+Risk level: MODERATE               | Risk level: <UNKNOWN>             
+Plaintext baseline: 0.4952         |                                   
+Error: 0.000000                    |                                   
+Correct: YES                       | Server learned: NOTHING           
+
+  Step 3: Treatment Decision (LOCAL -- no server involved)
+  ........................................................................
+            AGENT VIEW             |            SERVER VIEW            
+-----------------------------------+-----------------------------------
+Drug interaction: MODERATE         | (not involved in this step)       
+Risk score: 0.4952 (MODERATE)      |                                   
+                                   | Decision: <NEVER SENT>            
+Decision:                          | Treatment plan: <NEVER SENT>      
+  MONITOR: Moderate interaction    |                                   
+  detected. Assess risk-benefit    | Total server knowledge: 0 bits    
+  before prescribing. Patient      |                                   
+  risk is moderate.                |                                   
+
+  ------------------------------------------------------------------------
+  Pipeline complete for Margaret T.: 1249 ms total
+
+======================  PHASE 3: BATCH EXECUTION  ======================
+
+  Running pipeline for 9 more patients...
+
+  [ 2/10] James R.         metformin+simvastatin    interaction=SEVERE   risk=MODERATE    1213 ms [OK]
+  [ 3/10] Aisha K.         aspirin+ibuprofen      interaction=MILD     risk=MODERATE    1190 ms [OK]
+  [ 4/10] Robert M.        lisinopril+duloxetine     interaction=MODERATE risk=MODERATE    1189 ms [OK]
+  [ 5/10] Sofia L.         aspirin+pantoprazole   interaction=NONE     risk=MODERATE    1208 ms [OK]
+  [ 6/10] William H.       atorvastatin+rivaroxaban    interaction=SEVERE   risk=MODERATE    1191 ms [OK]
+  [ 7/10] Chen W.          metformin+furosemide     interaction=MILD     risk=MODERATE    1192 ms [OK]
+  [ 8/10] Patricia D.      gabapentin+apixaban       interaction=NONE     risk=MODERATE    1185 ms [OK]
+  [ 9/10] David S.         aspirin+simvastatin    interaction=MILD     risk=MODERATE    1206 ms [OK]
+  [10/10] Elena V.         montelukast+ibuprofen      interaction=MODERATE risk=MODERATE    1204 ms [OK]
+
+=================  PHASE 4: SERVER OBSERVATION AUDIT  ==================
+
+  What did the servers actually observe?
+
+  PIR Server (Drug Interaction Database):
+    Total queries processed:    10
+    Drug pairs revealed:        0  (all encrypted)
+    Interaction results leaked:  0  (all encrypted)
+    Query 1: input=422.3 KB, output=39.6 MB, time=204ms, drug_pair_visible=False
+    Query 2: input=422.4 KB, output=39.6 MB, time=210ms, drug_pair_visible=False
+    Query 3: input=422.2 KB, output=39.6 MB, time=197ms, drug_pair_visible=False
+    ... (7 more queries)
+
+  FHE Server (Risk Scoring Service):
+    Total scores computed:      10
+    Patient features revealed:  0  (all encrypted)
+    Risk scores leaked:         0  (all encrypted)
+    Query 1: input=1.0 MB, output=448.3 KB, time=35ms, features_visible=False, score_visible=False
+    Query 2: input=1.0 MB, output=449.0 KB, time=35ms, features_visible=False, score_visible=False
+    Query 3: input=1.0 MB, output=449.5 KB, time=34ms, features_visible=False, score_visible=False
+    ... (7 more scores)
+
+  Information leaked to servers: 0 bits
+  (Servers see ciphertext sizes and timing only -- no content)
+
+======================  PHASE 5: RESULTS SUMMARY  ======================
+
+  +-----------------------------------------------------------------+
+  |                       PERFORMANCE SUMMARY                       |
+  +------------------------------+----------------------------------+
+  | Metric                       | Value                            |
+  +------------------------------+----------------------------------+
+  | Patients processed           | 10                               |
+  +------------------------------+----------------------------------+
+  | PIR lookup (avg)             | 328.9 ms                         |
+  |   Query generation           | 3.8 ms                           |
+  |   Server processing          | 200.5 ms                         |
+  |   Decryption                 | 124.6 ms                         |
+  +------------------------------+----------------------------------+
+  | FHE scoring (avg)            | 866.0 ms                         |
+  |   Encryption                 | 7.1 ms                           |
+  |   Server computation         | 42.2 ms                          |
+  |   Decryption                 | 816.7 ms                         |
+  +------------------------------+----------------------------------+
+  | Local decision (avg)         | 0.006 ms                         |
+  | Total pipeline (avg)         | 1202.8 ms                        |
+  | Total pipeline (min)         | 1185.0 ms                        |
+  | Total pipeline (max)         | 1248.7 ms                        |
+  +------------------------------+----------------------------------+
+  | PIR correctness              | 10/10 (100%)                     |
+  | FHE correctness              | 10/10 (100%)                     |
+  | FHE max error                | 0.00000100                       |
+  +------------------------------+----------------------------------+
+  | Communication (PIR query)    | 422.3 KB                         |
+  | Communication (PIR response) | 39.6 MB                          |
+  | Communication (FHE features) | 1.0 MB                           |
+  | Communication (FHE score)    | 448.3 KB                         |
+  +------------------------------+----------------------------------+
+  | Server information leakage   | 0 bits                           |
+  | Privacy guarantee            | 128-bit computational security   |
+  +------------------------------+----------------------------------+
+
+  Per-patient results:
+  Patient          Drug Pair                    Interaction  Risk         Total ms  Check
+  ---------------- ---------------------------- ------------ ---------- ---------- ------
+  Margaret T.      warfarin+albuterol           MODERATE     MODERATE         1249     OK
+  James R.         metformin+simvastatin        SEVERE       MODERATE         1213     OK
+  Aisha K.         aspirin+ibuprofen            MILD         MODERATE         1190     OK
+  Robert M.        lisinopril+duloxetine        MODERATE     MODERATE         1189     OK
+  Sofia L.         aspirin+pantoprazole         NONE         MODERATE         1208     OK
+  William H.       atorvastatin+rivaroxaban     SEVERE       MODERATE         1191     OK
+  Chen W.          metformin+furosemide         MILD         MODERATE         1192     OK
+  Patricia D.      gabapentin+apixaban          NONE         MODERATE         1185     OK
+  David S.         aspirin+simvastatin          MILD         MODERATE         1206     OK
+  Elena V.         montelukast+ibuprofen        MODERATE     MODERATE         1204     OK
+
+========================================================================
+  DEMO RESULT: All 10 pipeline runs completed successfully.
+  Encrypted results match plaintext baselines in every case.
+  Servers processed 10 queries without learning any patient data.
+========================================================================
+
+  Conclusion: FHE and PIR provide functional privacy for AI agent
+  tool calls. The trade-off is latency (~1203 ms per pipeline
+  vs <1 ms plaintext), but the server learns exactly 0 bits about
+  patient data, drug queries, risk scores, or treatment decisions.
+
+  Timing data saved to results/demo_timings.json

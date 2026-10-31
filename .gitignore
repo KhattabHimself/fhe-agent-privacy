@@ -1,0 +1,57 @@
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Paper / slides are not part of this repository
+paper/
+presentation/
+*.pptx
+~$*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Generated datasets (reproduce with: python data/generate_all.py)
+data/drug_interactions_10k.json
+data/drug_interactions_200.json
+data/synthetic_patients_1000.json
+data/synthetic_patients_10.json
+# Legacy data file (replaced by sized variants above)
+data/drug_interactions.json
+
+# Generated results (can be reproduced with `make all`)
+# Uncomment to track results in version control:
+# results/benchmarks/
+# results/leakage_analysis/
+# results/figures/
+# results/demo_output.txt
+# results/demo_timings.json

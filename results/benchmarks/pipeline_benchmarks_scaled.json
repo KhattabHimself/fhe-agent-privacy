@@ -1,0 +1,37 @@
+{
+  "benchmark": "Pipeline benchmarks (scaled)",
+  "hardware": {
+    "cpu": "AMD64 Family 26 Model 36 Stepping 0, AuthenticAMD",
+    "cpu_cores_physical": 10,
+    "cpu_cores_logical": 20,
+    "ram_total_gb": 31.1,
+    "os": "Windows 10.0.26200",
+    "python": "3.12.4",
+    "tenseal": "0.3.16",
+    "numpy": "2.4.3",
+    "platform_node": "redacted"
+  },
+  "timestamp": "2026-03-22T10:01:43.771409",
+  "results": [
+    {
+      "db_size": 10000,
+      "db_tag": "10k",
+      "n_patients": 100,
+      "pir_setup_ms": 2344.568399945274,
+      "pir_setup_peak_rss_mb": 1268.15234375,
+      "fhe_setup_ms": 824.0349000552669,
+      "fhe_setup_peak_rss_mb": 1278.1953125,
+      "pir_phase_ms_mean": 1023.0127489950974,
+      "pir_phase_ms_std": 19.779739951048924,
+      "fhe_phase_ms_mean": 882.695134000387,
+      "fhe_phase_ms_std": 12.268688020664271,
+      "decision_ms_mean": 0.008276000153273344,
+      "decision_ms_std": 0.0051921555282665195,
+      "total_ms_mean": 1905.7161589956377,
+      "total_ms_std": 28.576433399345238,
+      "pipeline_peak_rss_mb": 1403.6484375,
+      "pir_correctness": "100/100",
+      "fhe_correctness": "100/100"
+    }
+  ]
+}

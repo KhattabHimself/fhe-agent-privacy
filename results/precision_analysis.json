@@ -1,0 +1,156 @@
+{
+  "presets": [
+    {
+      "preset": "light",
+      "poly_modulus_degree": 8192,
+      "coeff_mod_bit_sizes": [
+        60,
+        40,
+        40,
+        60
+      ],
+      "global_scale": 1099511627776,
+      "multiplicative_depth": 2,
+      "stages": [
+        {
+          "max_abs_error": 5.266944491655323e-09,
+          "mean_abs_error": 7.860117307023629e-10,
+          "max_rel_error": 7.15396836815981e-07,
+          "mean_rel_error": 1.026927569218094e-08,
+          "bits_of_precision": 27.500386598981876,
+          "exceeds_clinical_tolerance": false,
+          "stage": "encrypt_decrypt_roundtrip",
+          "depth_consumed": 0
+        },
+        {
+          "max_abs_error": 3.3145097777520505e-07,
+          "mean_abs_error": 1.6304868598715495e-07,
+          "max_rel_error": 2.408885146188922e-07,
+          "mean_rel_error": 1.3384315519157931e-07,
+          "bits_of_precision": 21.52470115541353,
+          "exceeds_clinical_tolerance": false,
+          "stage": "plaintext_scalar_multiply",
+          "depth_consumed": 0,
+          "note": "plaintext\u00d7ciphertext does not consume a level"
+        },
+        {
+          "max_abs_error": 1.2573221053191475e-07,
+          "mean_abs_error": 4.1680679186907774e-08,
+          "max_rel_error": 9.680868131823211e-05,
+          "mean_rel_error": 1.1051390425826257e-06,
+          "bits_of_precision": 22.9231423722755,
+          "exceeds_clinical_tolerance": false,
+          "stage": "element_wise_square",
+          "depth_consumed": 1
+        },
+        {
+          "max_abs_error": 6.288222165196089e-07,
+          "mean_abs_error": 6.288222165196089e-07,
+          "max_rel_error": 3.048143906020829e-07,
+          "mean_rel_error": 3.048143906020829e-07,
+          "bits_of_precision": 20.600844474769502,
+          "exceeds_clinical_tolerance": false,
+          "stage": "dot_product",
+          "depth_consumed": 1
+        },
+        {
+          "max_abs_error": 2.501546780830921e-08,
+          "mean_abs_error": 1.1967709270255255e-08,
+          "max_rel_error": 3.646921224386848e-08,
+          "mean_rel_error": 1.9374545191448548e-08,
+          "bits_of_precision": 25.252604327019448,
+          "exceeds_clinical_tolerance": false,
+          "stage": "cubic_polynomial",
+          "depth_consumed": 3
+        },
+        {
+          "stage": "full_pipeline_dot_plus_cubic",
+          "depth_consumed": 4,
+          "error": "ValueError: scale out of bounds",
+          "note": "failed -- this preset cannot support the full pipeline"
+        }
+      ],
+      "clinical_tolerance": 0.01,
+      "tolerance_first_exceeded": null
+    },
+    {
+      "preset": "deep",
+      "poly_modulus_degree": 16384,
+      "coeff_mod_bit_sizes": [
+        60,
+        40,
+        40,
+        40,
+        40,
+        60
+      ],
+      "global_scale": 1099511627776,
+      "multiplicative_depth": 4,
+      "stages": [
+        {
+          "max_abs_error": 9.093067049326109e-09,
+          "mean_abs_error": 1.6951394800346353e-09,
+          "max_rel_error": 1.2118538761912792e-07,
+          "mean_rel_error": 7.981101328864424e-09,
+          "bits_of_precision": 26.712585863138504,
+          "exceeds_clinical_tolerance": false,
+          "stage": "encrypt_decrypt_roundtrip",
+          "depth_consumed": 0
+        },
+        {
+          "max_abs_error": 3.51508968421399e-06,
+          "mean_abs_error": 1.7409474873963938e-06,
+          "max_rel_error": 1.4909582550123655e-06,
+          "mean_rel_error": 1.4289426370097275e-06,
+          "bits_of_precision": 18.118007070546945,
+          "exceeds_clinical_tolerance": false,
+          "stage": "plaintext_scalar_multiply",
+          "depth_consumed": 0,
+          "note": "plaintext\u00d7ciphertext does not consume a level"
+        },
+        {
+          "max_abs_error": 1.3557573886879837e-06,
+          "mean_abs_error": 4.448642264615792e-07,
+          "max_rel_error": 9.72145843141286e-06,
+          "mean_rel_error": 1.5439515450723655e-06,
+          "bits_of_precision": 19.49246953646361,
+          "exceeds_clinical_tolerance": false,
+          "stage": "element_wise_square",
+          "depth_consumed": 1
+        },
+        {
+          "max_abs_error": 7.625390958665434e-07,
+          "mean_abs_error": 7.625390958665434e-07,
+          "max_rel_error": 2.4053546911111853e-07,
+          "mean_rel_error": 2.4053546911111853e-07,
+          "bits_of_precision": 20.322685356856077,
+          "exceeds_clinical_tolerance": false,
+          "stage": "dot_product",
+          "depth_consumed": 1
+        },
+        {
+          "max_abs_error": 2.5530700731302147e-07,
+          "mean_abs_error": 1.3140103723219278e-07,
+          "max_rel_error": 3.7163848671198246e-07,
+          "mean_rel_error": 2.1183691138253656e-07,
+          "bits_of_precision": 21.90126352882839,
+          "exceeds_clinical_tolerance": false,
+          "stage": "cubic_polynomial",
+          "depth_consumed": 3
+        },
+        {
+          "max_abs_error": 5.005762717669171e-07,
+          "mean_abs_error": 5.005762717669171e-07,
+          "max_rel_error": 1.0802519954445838e-06,
+          "mean_rel_error": 1.0802519954445838e-06,
+          "bits_of_precision": 20.929906757954626,
+          "exceeds_clinical_tolerance": false,
+          "stage": "full_pipeline_dot_plus_cubic",
+          "depth_consumed": 4
+        }
+      ],
+      "clinical_tolerance": 0.01,
+      "tolerance_first_exceeded": null
+    }
+  ]
+}
